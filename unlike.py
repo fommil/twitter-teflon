@@ -12,7 +12,9 @@
 # 5. https://twittercommunity.com/t/many-tweets-in-a-zombie-favorite-but-not-favorite-state/105620
 # 6. :facepalm:
 # 7. go and "like" everything via the UI with the accompanying javascript tool
-# 8. repeat
+# 8. wait 3 weeks and everything still comes back
+# 9. :facepalm:
+# 10. run unlike-archive.py
 import tweepy
 import time
 import sys
