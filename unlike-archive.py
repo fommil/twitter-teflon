@@ -5,6 +5,7 @@
 #
 # Settings and Privacy => Your Twitter Data => Download Data
 #
+# then take like.js, remove the jsonp bit and save as like.json
 import tweepy
 import time
 import sys
@@ -38,28 +39,15 @@ def archive_cursor():
 # https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/post-favorites-destroy
 # unspecified rate limit
 
-def purge():
-    print("getting likes")
-    tweets = api.favorites(user)
-    if len(tweets) == 0:
-        print("no favorites left")
-        sys.exit(0)
-    for f in tweets:
-        try:
-          api.destroy_favorite(f.id)
-          print("SUCCESS {}".format(f.text))
-        except tweepy.error.TweepError:
-          print("FAILURE {} {}".format(f.text, f.id))
-
 if __name__ == "__main__":
     for i in archive_cursor():
+        time.sleep(10)
         print("trying {}".format(i))
         try:
             api.destroy_favorite(i)
             print("SUCCESS {}".format(i))
         except tweepy.error.TweepError as e:
             if e.api_code == 144:
-                # :facepalm:
                 try:
                     print("retrying {}".format(i))
                     api.create_favorite(i)
