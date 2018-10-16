@@ -1,0 +1,13 @@
+Dependencies
+
+```
+pyenv install 3.6.6
+pip install pipenv
+pipenv update
+```
+
+and run scripts like
+
+```
+pipenv run python unlike.py
+```
