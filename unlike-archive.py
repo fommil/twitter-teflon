@@ -53,6 +53,6 @@ if __name__ == "__main__":
                     api.create_favorite(i)
                     api.destroy_favorite(i)
                 except tweepy.error.TweepError as e2:
-                    print("FAILURE {}".format(e2))
+                    print("FAILURE {} {}".format(i, e2))
             else:
-                print("FAILURE {}".format(e))
+                print("FAILURE {} {}".format(i, e))
