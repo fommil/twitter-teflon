@@ -41,19 +41,33 @@ def archive_cursor():
 
 if __name__ == "__main__":
     for i in archive_cursor():
-        time.sleep(10)
         print("trying {}".format(i))
         try:
+            api.get_status(i)
+        except tweepy.error.RateLimitError:
+            print("RATE LIMIT!")
+            sys.exit(1)
+        except tweepy.error.TweepError as e:
+            if e.api_code == 136:
+                continue;
+            print("FAILURE UNEXPECTED {} {}".format(i, e))
+            sys.exit(1)
+        try:
+            # we could avoid this by detecting the Troolean state better
             api.destroy_favorite(i)
             print("SUCCESS {}".format(i))
+        except tweepy.error.RateLimitError:
+            print("RATE LIMIT!")
+            sys.exit(1)
         except tweepy.error.TweepError as e:
             if e.api_code == 144:
                 try:
                     print("retrying {}".format(i))
-                    time.sleep(10)
                     api.create_favorite(i)
-                    time.sleep(10)
                     api.destroy_favorite(i)
+                except tweepy.error.RateLimitError:
+                    print("RATE LIMIT!")
+                    sys.exit(1)
                 except tweepy.error.TweepError as e2:
                     print("FAILURE {} {}".format(i, e2))
             else:
