@@ -50,7 +50,9 @@ if __name__ == "__main__":
             if e.api_code == 144:
                 try:
                     print("retrying {}".format(i))
+                    time.sleep(10)
                     api.create_favorite(i)
+                    time.sleep(10)
                     api.destroy_favorite(i)
                 except tweepy.error.TweepError as e2:
                     print("FAILURE {} {}".format(i, e2))
