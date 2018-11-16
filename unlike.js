@@ -3,6 +3,13 @@
 
 // run in the javascript console for https://twitter.com/i/likes
 
+// screen at a time
+function toggle_like() {
+  $('.js-actionFavorite').not('.ProfileTweet-actionButtonUndo').click();
+}
+
+// or automate it...
+
 function toggle_like() {
   $('.js-actionFavorite').not('.ProfileTweet-actionButtonUndo').click();
   setTimeout(remove_tweets, 5000);

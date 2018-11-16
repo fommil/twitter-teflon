@@ -31,8 +31,8 @@ user = api.me().screen_name
 def purge():
     for t in tweepy.Cursor(api.user_timeline).items():
         age = datetime.datetime.utcnow() - t.created_at
-#        if age.days < 1:
-#            continue
+        if age.days < 1:
+            continue
         if t.retweeted:
             print("DELETE (RETWEET): {}".format(t.id))
             api.destroy_status(t.id);
